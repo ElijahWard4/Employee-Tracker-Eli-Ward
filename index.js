@@ -59,7 +59,9 @@ const mainMenu = async () => {
         mainMenu();
       };
 
-      
-
-
-
+        //function to view all employees using a join statement to display the department name, role title, and manager name
+      const viewAllEmployees = async () => {
+        const res = await pool.query('SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, manager.first_name AS manager FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id LEFT JOIN employee AS manager ON employee.manager_id = manager.id');
+        console.table(res.rows);
+        mainMenu();
+      };
