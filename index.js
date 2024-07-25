@@ -22,4 +22,24 @@ const mainMenu = async () => {
       },
     ]);
 
-    
+    //switch statement to determine which function to run based on the user's choice
+    switch (choice) {
+        case 'View All Departments':
+          return viewAllDepartments();
+        case 'View All Roles':
+          return viewAllRoles();
+        case 'View All Employees':
+          return viewAllEmployees();
+        case 'Add a Department':
+          return addDepartment();
+        case 'Add a Role':
+          return addRole();
+        case 'Add an Employee':
+          return addEmployee();
+        case 'Update an Employee Role':
+          return updateEmployeeRole();
+        default:
+          return process.exit();
+      }
+    };
+
