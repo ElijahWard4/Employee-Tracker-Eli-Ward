@@ -113,4 +113,11 @@ const addRole = async () => {
       console.log(`Added ${title} to the database`);
       mainMenu();
     };
-    
+
+    //add an employee to the database using a list of role choices and manager choices that are pulled from the database 
+    const addEmployee = async () => {
+        const roles = await pool.query('SELECT * FROM role');
+        const roleChoices = roles.rows.map(role => ({
+          name: role.title,
+          value: role.id,
+        }));
