@@ -1,7 +1,14 @@
-Employee Tracker
 # Employee Tracker
 
 Employee Tracker is a command-line application that allows business owners to manage their company's employee database. The application provides functionalities to view and manage departments, roles, and employees, enabling business owners to organize and plan their business effectively.
+
+## Demo
+
+
+
+https://github.com/user-attachments/assets/0e2c090f-fff1-4d5d-9377-d359ba64e9db
+
+
 
 ## Table of Contents
 - [Installation](#installation)
