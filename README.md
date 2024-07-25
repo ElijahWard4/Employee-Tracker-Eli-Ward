@@ -21,7 +21,7 @@ https://github.com/user-attachments/assets/0e2c090f-fff1-4d5d-9377-d359ba64e9db
 ## Installation
 Clone the repository:
 ```sh
-git clone https://github.com/ElijahWard4/employee-tracker.git
+git clone https://github.com/ElijahWard4/employee-tracker-Eli-Ward.git
 cd employee_tracker
 ```
 
