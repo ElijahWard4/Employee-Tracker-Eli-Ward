@@ -80,3 +80,37 @@ const mainMenu = async () => {
   console.log(`Added ${name} to the database`);
   mainMenu();
 };
+
+//async function to add a role to the database using a list of department choices  
+const addRole = async () => {
+    const departments = await pool.query('SELECT * FROM department');
+    const departmentChoices = departments.rows.map(department => ({
+      name: department.name,
+      value: department.id,
+    }));
+
+    const { title, salary, department_id } = await inquirer.prompt([
+        {
+          type: 'input',
+          name: 'title',
+          message: 'Enter the name of the role:',
+        },
+        {
+          type: 'input',
+          name: 'salary',
+          message: 'Enter the salary of the role:',
+        },
+        {
+          type: 'list',
+          name: 'department_id',
+          message: 'Select the department for the role:',
+          choices: departmentChoices,
+        },
+      ]);
+
+      //inserting the role into the database with a title, salary, and department id 
+      await pool.query('INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3)', [title, salary, department_id]);
+      console.log(`Added ${title} to the database`);
+      mainMenu();
+    };
+    
