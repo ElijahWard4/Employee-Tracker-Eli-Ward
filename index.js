@@ -65,3 +65,18 @@ const mainMenu = async () => {
         console.table(res.rows);
         mainMenu();
       };
+
+      //async function to add a department to the database  
+      const addDepartment = async () => {
+        const { name } = await inquirer.prompt([
+          {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the name of the department:',
+          },
+        ]);
+
+        await pool.query('INSERT INTO department (name) VALUES ($1)', [name]);
+  console.log(`Added ${name} to the database`);
+  mainMenu();
+};
