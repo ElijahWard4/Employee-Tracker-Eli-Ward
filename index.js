@@ -43,3 +43,21 @@ const mainMenu = async () => {
       }
     };
 
+    //function to view all departments
+    const viewAllDepartments = async () => {
+        const res = await pool.query('SELECT * FROM department');
+        console.table(res.rows);
+        mainMenu();
+      };
+
+        //function to view all roles using a join statement to display the department name instead of the department id 
+      const viewAllRoles = async () => {
+        const res = await pool.query('SELECT role.id, role.title, department.name AS department, role.salary FROM role JOIN department ON role.department_id = department.id');
+        console.table(res.rows);
+        mainMenu();
+      };
+
+      
+
+
+
