@@ -161,3 +161,41 @@ const addRole = async () => {
   console.log(`Added ${first_name} ${last_name} to the database`);
   mainMenu();
 };
+
+//update an employee's role using a list of employee choices and role choices
+const updateEmployeeRole = async () => {
+    const employees = await pool.query('SELECT * FROM employee');
+    const employeeChoices = employees.rows.map(employee => ({
+      name: `${employee.first_name} ${employee.last_name}`,
+      value: employee.id,
+    }));
+    const roles = await pool.query('SELECT * FROM role');
+    const roleChoices = roles.rows.map(role => ({
+      name: role.title,
+      value: role.id,
+    }));
+
+    //prompting the user to select an employee and a new role for the employee
+    const { employee_id, role_id } = await inquirer.prompt([
+        {
+          type: 'list',
+          name: 'employee_id',
+          message: 'Select the employee to update:',
+          choices: employeeChoices,
+        },
+        {
+          type: 'list',
+          name: 'role_id',
+          message: 'Select the new role for the employee:',
+          choices: roleChoices,
+        },
+      ]);
+
+        //updating the employee's role in the database
+      await pool.query('UPDATE employee SET role_id = $1 WHERE id = $2', [role_id, employee_id]);
+  console.log(`Updated employee's role`);
+  mainMenu();
+};
+
+//starting the application
+mainMenu();
