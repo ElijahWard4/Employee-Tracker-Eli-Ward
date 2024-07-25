@@ -121,3 +121,11 @@ const addRole = async () => {
           name: role.title,
           value: role.id,
         }));
+
+        //pulling the employee table from the database to get the first name, last name, and id of the manager to display in the list of manager choices
+        const employees = await pool.query('SELECT * FROM employee');
+        const managerChoices = employees.rows.map(employee => ({
+          name: `${employee.first_name} ${employee.last_name}`,
+          value: employee.id,
+        }));
+        managerChoices.push({ name: 'None', value: null });
