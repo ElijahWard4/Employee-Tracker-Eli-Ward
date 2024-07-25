@@ -43,6 +43,8 @@ const mainMenu = async () => {
       }
     };
 
+//using pool.query for ease of use on my brain rather than using a query.sql file to store all the queries
+
     //function to view all departments
     const viewAllDepartments = async () => {
         const res = await pool.query('SELECT * FROM department');
