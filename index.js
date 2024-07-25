@@ -129,3 +129,35 @@ const addRole = async () => {
           value: employee.id,
         }));
         managerChoices.push({ name: 'None', value: null });
+
+        //prompting the user to enter the first name, last name, role, and manager for the employee
+        const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([
+            {
+              type: 'input',
+              name: 'first_name',
+              message: 'Enter the first name of the employee:',
+            },
+            {
+              type: 'input',
+              name: 'last_name',
+              message: 'Enter the last name of the employee:',
+            },
+            {
+              type: 'list',
+              name: 'role_id',
+              message: 'Select the role for the employee:',
+              choices: roleChoices,
+            },
+            {
+              type: 'list',
+              name: 'manager_id',
+              message: 'Select the manager for the employee:',
+              choices: managerChoices,
+            },
+          ]);
+
+            //inserting the employee into the database with the first name, last name, role id, and manager id
+          await pool.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)', [first_name, last_name, role_id, manager_id]);
+  console.log(`Added ${first_name} ${last_name} to the database`);
+  mainMenu();
+};
